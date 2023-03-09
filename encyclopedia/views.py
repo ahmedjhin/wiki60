@@ -30,7 +30,7 @@ def entry(request,title):
             'content': html_content
         })
     
-
+    
 def search(request):
     if request.method == 'POST':
         entry_search = request.POST['q']
@@ -38,5 +38,17 @@ def search(request):
         if html_contetn is not None:
             return render(request, 'encyclopedia/entry.html',{
                 'title': entry_search,
-                "content": html_contetn
+                'content': html_contetn
             })
+        else:
+            allEntries = util.list_entries()
+            recommendation = []
+            for entry in allEntries:
+                if entry_search.lower() in entry.lower():
+                    recommendation.append(entry)
+            return render(request,'encyclopedia/search.html', {
+                'recommendation': recommendation
+            })
+
+
+
