@@ -52,3 +52,19 @@ def search(request):
 
 
 
+def new_page(request):
+    if request.method == 'GET':
+        return render(request,'encyclopedia/new_page.html',
+                  {'title':'creat new page'})
+
+
+def created_page(request):
+    if request.method  == 'POST':
+        page_title_is = request.POST['title']
+        page_content = request.POST['content']
+        md_content2 = util.save_entry(page_title_is,page_content)
+        convertedHTML = util.get_entry(md_content2)
+        html_content2 = convert_md_to_html(convertedHTML)
+    
+    return render(request,'encyclopedia/page_created.html',
+                      {'content':html_content2,})
