@@ -74,3 +74,4 @@ def created_page(request):
             return render(request, 'encyclopedia/error.html', {
                 'message': 'Error: Could not save the new entry.'
             })
+        

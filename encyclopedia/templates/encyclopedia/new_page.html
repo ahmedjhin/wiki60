@@ -1,0 +1,39 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    {{title}}
+{% endblock %}
+
+{% block body %}
+  <form action="{% url 'page_created' title=title%}" method="POST">
+    {% csrf_token %}
+    <div style="display: flex;
+    flex-direction: column;">
+
+      <input type="text" name="title" style="margin-bottom: 10px; width:200px" placeholder="Enter your page name" style="display:inline">
+      <textarea style="display:inline" name="content" cols="30">
+        
+      </textarea>
+      
+    </div>
+
+  </form>
+  <style>
+    /* Media queries for smaller screens */
+    @media only screen and (max-width: 600px) {
+      /* Adjust the width of the input field and textarea for smaller screens */
+      input[name="page_title"], textarea {
+        width: 90%;
+      }
+    }
+  
+    /* Media queries for even smaller screens */
+    @media only screen and (max-width: 400px) {
+      /* Adjust the font-size of the input field and textarea for even smaller screens */
+      input[name="page_title"], textarea {
+        font-size: 12px;
+      }
+    }
+  </style>
+
+{% endblock %}
