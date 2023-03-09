@@ -59,12 +59,18 @@ def new_page(request):
 
 
 def created_page(request):
-    if request.method  == 'POST':
-        page_title_is = request.POST['title']
+    if request.method == 'POST':
+        page_title = request.POST['title']
         page_content = request.POST['content']
-        md_content2 = util.save_entry(page_title_is,page_content)
-        convertedHTML = util.get_entry(md_content2)
-        html_content2 = convert_md_to_html(convertedHTML)
-    
-    return render(request,'encyclopedia/page_created.html',
-                      {'content':html_content2,})
+        util.save_entry(page_title, page_content)
+        html_content = convert_md_to_html(page_title)
+        if html_content is not None:
+            return render(request, 'encyclopedia/page_created.html', {
+                'title': page_title,
+                'content': html_content,
+            })
+        else:
+            # Handle the case when the entry couldn't be saved
+            return render(request, 'encyclopedia/error.html', {
+                'message': 'Error: Could not save the new entry.'
+            })
