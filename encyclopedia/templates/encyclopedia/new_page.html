@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-  <form action="{% url 'page_created' title=title%}" method="POST">
+  <form action="{% url 'page_created' %}" method="POST">
     {% csrf_token %}
     <div style="display: flex;
     flex-direction: column;">
@@ -16,7 +16,7 @@
       </textarea>
       
     </div>
-
+    <input type="submit">
   </form>
   <style>
     /* Media queries for smaller screens */
