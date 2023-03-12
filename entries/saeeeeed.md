@@ -1,2 +1,0 @@
-is kinda gay        
-      

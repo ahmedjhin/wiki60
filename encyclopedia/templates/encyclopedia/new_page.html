@@ -9,9 +9,17 @@
     {% csrf_token %}
     <div style="display: flex;
     flex-direction: column;">
+    <div style="display: flex;
+    align-items: center;">
 
-      <input type="text" name="title" style="margin-bottom: 10px; width:200px" placeholder="Enter your page name" style="display:inline">
-      <textarea style="display:inline" name="content" cols="30">
+      <label for="title1">title: </label>
+      <input type="text" id="title1" name="title" style="margin-bottom: 10px; width:200px" placeholder="Enter your page name" style="display:inline">
+    </div>
+    <div style="display: flex;
+    align-items: center;">
+      <label for="content1">Markdown Content</label>
+      <textarea id="content1" style="display:inline" name="content" cols="20">
+      </div>
         
       </textarea>
       
