@@ -12,16 +12,13 @@
     <div style="display: flex;
     align-items: center;">
 
-      <label for="title1">title: </label>
-      <input type="text" id="title1" name="title" style="margin-bottom: 10px; width:200px" placeholder="Enter your page name" style="display:inline">
+      <label for="title1">Title: </label>
+      <input required type="text" id="title1" name="title" style="margin-bottom: 10px; width:200px" placeholder="Enter your page name" style="display:inline">
     </div>
-    <div style="display: flex;
-    align-items: center;">
-      <label for="content1">Markdown Content</label>
-      <textarea id="content1" style="display:inline" name="content" cols="20">
-      </div>
-        
-      </textarea>
+    <div >
+      <label style="display: block;" for="content1">Markdown Content</label>
+      <textarea required id="content1" style="display:inline" name="content" cols="20"></textarea>
+    </div>
       
     </div>
     <input type="submit">

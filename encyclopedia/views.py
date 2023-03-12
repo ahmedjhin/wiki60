@@ -63,6 +63,9 @@ def created_page(request):
         page_title = request.POST['title']
         page_content = request.POST['content']
         allEntries = util.list_entries()
+        if page_title == '' or page_content == '':
+            return render(request, 'encyclopedia/error.html',
+                          {'message': 'please fill all the fields'})
         for title in allEntries:
             if page_title == title:
                 return render(request,'encyclopedia/alredy.html',{
