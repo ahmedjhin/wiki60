@@ -1,4 +1,8 @@
 {% extends "encyclopedia/layout.html" %}
+ 
+{% load static %}
+
+  <link rel="stylesheet" type="text/css" href="{% static 'encyclopedia/styles.css' %}">
 
 {% block title %}
     {{title}}
@@ -17,28 +21,12 @@
     </div>
     <div >
       <label style="display: block;" for="content1">Markdown Content</label>
-      <textarea required id="content1" style="display:inline" name="content" cols="20"></textarea>
+      <textarea required id="content1" style="display:inline" name="content"></textarea>
     </div>
       
     </div>
-    <input type="submit">
+    <button style="background-color: antiquewhite; font-weight:bold" class="btn" type="submit">creat Page </button>
   </form>
-  <style>
-    /* Media queries for smaller screens */
-    @media only screen and (max-width: 600px) {
-      /* Adjust the width of the input field and textarea for smaller screens */
-      input[name="page_title"], textarea {
-        width: 90%;
-      }
-    }
   
-    /* Media queries for even smaller screens */
-    @media only screen and (max-width: 400px) {
-      /* Adjust the font-size of the input field and textarea for even smaller screens */
-      input[name="page_title"], textarea {
-        font-size: 12px;
-      }
-    }
-  </style>
 
 {% endblock %}

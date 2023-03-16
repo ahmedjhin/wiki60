@@ -1,6 +1,7 @@
 from django.shortcuts import render
 import markdown
 from . import util
+import random
 
 def convert_md_to_html(title):
     content = util.get_entry(title)
@@ -34,6 +35,10 @@ def entry(request,title):
 def search(request):
     if request.method == 'POST':
         entry_search = request.POST['q']
+        if entry_search == '' or not entry_search == util.list_entries:
+            return render(request, 'encyclopedia/error.html',{
+                'message':'This entry does not exist'
+            })
         html_contetn = convert_md_to_html(entry_search)
         if html_contetn is not None:
             return render(request, 'encyclopedia/entry.html',{
@@ -74,7 +79,7 @@ def created_page(request):
         util.save_entry(page_title, page_content)
         html_content = convert_md_to_html(page_title)
         if html_content is not None:
-            return render(request, 'encyclopedia/page_created.html', {
+            return render(request, 'encyclopedia/entry.html', {
                 'title': page_title,
                 'content': html_content,
             })
@@ -82,4 +87,46 @@ def created_page(request):
             # Handle the case when the entry couldn't be saved
             return render(request, 'encyclopedia/error.html', {
                 'message': 'Error: Could not save the new entry.'
+            })
+        
+
+def edit(request):
+    if request.method == 'POST':
+        page_title = request.POST['entry_title']
+        page_content = util.get_entry(page_title)
+        return render(request, 'encyclopedia/edit.html', {
+            'title': page_title,
+            'content': page_content
+        })
+    
+
+def save_edit(request):
+    if request.method == 'POST':
+        page_title = request.POST['title']
+        page_content = request.POST['content']
+        util.save_entry(page_title,page_content)
+        html_contetn = convert_md_to_html(page_title)
+        if html_contetn is not None:
+            return render(request, 'encyclopedia/entry.html',{
+                'title': page_title,
+                'content': html_contetn
+            })
+
+
+
+
+
+def randome(request):
+    allEntries = util.list_entries()
+    if len(allEntries) == 0:
+        return render(request, 'encyclopedia/error.html', {
+           'message': 'There are no entries in the database.'
+        })
+    else:
+        randomEntry = random.choice(allEntries)
+        html_content = convert_md_to_html(randomEntry)
+        if html_content is not None:
+            return render(request, 'encyclopedia/entry.html', {
+                'title': randomEntry,
+                'content': html_content
             })
