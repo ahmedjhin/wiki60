@@ -8,9 +8,10 @@
     <h1>All Pages</h1>
 
     <ul>
+        recommendation<br>
         {% for entry in recommendation %}
-        did you mean
-          <a href="">{{entry}}</a>
+        
+          <a href="{% url 'entry' title=entry%}">{{entry}}</a> <br>
         {% endfor %}
     </ul>
 

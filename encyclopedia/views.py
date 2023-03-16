@@ -35,7 +35,7 @@ def entry(request,title):
 def search(request):
     if request.method == 'POST':
         entry_search = request.POST['q']
-        if entry_search == '' or not entry_search == util.list_entries:
+        if entry_search == '' :
             return render(request, 'encyclopedia/error.html',{
                 'message':'This entry does not exist'
             })
